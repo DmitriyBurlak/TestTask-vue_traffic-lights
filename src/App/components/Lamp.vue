@@ -1,8 +1,7 @@
 <template>
-
-    <div class="lamp ">
-        <div class="lamp__counter">
-            2
+    <div :class="lampClasses">
+        <div class="lamp__counter" v-if="lampIsOn">
+            {{sec}}
         </div>
     </div>
 
@@ -12,14 +11,33 @@
 
 export default {
     name: 'Lamp',
-    props: []
+    props: ['color', 'lampColor', 'sec'],
+    computed: {
+        lampIsOn: function() {
+            return this.color === this.lampColor;
+        },
+        lampClasses: function() {
+            return `
+                lamp
+                lamp_${this.color}
+                ${this.lampIsOn ? 'lamp_on' : ''}
+                ${this.lampIsOn && this.sec < 4 ? 'lamp_blink' : ''}
+            `;
 
+        },
+    },
 }
 
 </script>
 
 
 <style lang='scss'>
+    @keyframes blink-animation {
+    to {
+        opacity: 0.5;
+    }
+    }
+
     .lamp {
         position: relative;
         margin: 10px auto;
@@ -36,7 +54,7 @@ export default {
 
         &_yellow {
             background-color: yellow;
-            color: #fff;
+            color: #000;
             opacity: 0.5;
         }
 
@@ -55,6 +73,10 @@ export default {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+        }
+
+        &_blink {
+            animation: blink-animation 0.2s steps(10, start) infinite;
         }
     }
 </style>

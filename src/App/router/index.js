@@ -6,9 +6,9 @@ Vue.use(VueRouter)
 
 const routes = [
     { path: '/', component: Home, name: 'home', redirect: '/red'},
-    { path: '/red', component: Home, name: 'red', props: {color: 'red', time: 10000} },
-    { path: '/yellow', component: Home, name: 'yellow', props: {color: 'yellow', time: 3000} },
-    { path: '/green', component: Home, name: 'green', props: {color: 'green', time: 15000} }, 
+    { path: '/red', component: Home, name: 'red', props: {lampColor: 'red', time: 10000} },
+    { path: '/yellow', component: Home, name: 'yellow', props: {lampColor: 'yellow', time: 3000} },
+    { path: '/green', component: Home, name: 'green', props: {lampColor: 'green', time: 15000} }, 
 ];
   
 const router = new VueRouter({
